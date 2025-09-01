@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "../App.css";
@@ -16,10 +17,16 @@ const Card = ({
   borderRadius,
   onClick,
   link,
+  extra,
 }) => {
   const [expanded, setExpanded] = useState(!expandable);
+
   const shadowClass =
-    shadow === "sm" ? "card-shadow-sm" : shadow === "lg" ? "card-shadow-lg" : "card-shadow-md";
+    shadow === "sm"
+      ? "card-shadow-sm"
+      : shadow === "lg"
+      ? "card-shadow-lg"
+      : "card-shadow-md";
 
   const handleCardClick = () => {
     if (expandable) setExpanded(!expanded);
@@ -37,7 +44,7 @@ const Card = ({
     backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
     backgroundSize: backgroundImage ? "cover" : undefined,
     backgroundPosition: backgroundImage ? "center" : undefined,
-    color: backgroundImage ? "white" : undefined,
+    color: backgroundImage ? "black" : undefined,
   };
 
   const cardClassNames = [
@@ -52,13 +59,23 @@ const Card = ({
   return (
     <div className={cardClassNames} style={cardStyle} onClick={handleCardClick}>
       {image && imagePosition === "top" && !backgroundImage && (
-        <img src={image} alt="Card" className="card-image-top" onClick={handleImageClick} />
+        <img
+          src={image}
+          alt="Card"
+          className="card-image-top"
+          onClick={handleImageClick}
+        />
       )}
-      {header && <div className="card-header">{header}</div>}
-      <div className="card-body">
 
-        {React.Children.map(children, (child) => (child?.type === "button" ? null : child))}
+      {header && <div className="card-header">{header}</div>}
+
+      <div className="card-body">
+        {children}
+        {expandable && expanded && extra && (
+          <div className="card-extra">{extra}</div>
+        )}
       </div>
+
       {footer && <div className="card-footer">{footer}</div>}
     </div>
   );
@@ -78,10 +95,8 @@ Card.propTypes = {
   borderRadius: PropTypes.string,
   onClick: PropTypes.func,
   link: PropTypes.string,
+  extra: PropTypes.node,
 };
 
 export default Card;
-
-
-
-
+   
