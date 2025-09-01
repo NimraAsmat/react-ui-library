@@ -81,7 +81,6 @@ body {
   padding-left: 12px;
 }
 
-
 .btn {
   display: inline-flex;
   align-items: center;
@@ -149,10 +148,25 @@ body {
   transition: all var(--transition-slow);
   display: flex;
   flex-direction: column;
-  min-height: 260px;
   position: relative;
   color: var(--color-text); 
+  cursor: default;
 }
+
+
+.card-expandable .card-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-slow), padding var(--transition-slow);
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.card-expandable.expanded .card-body {
+  max-height: 500px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 .card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
@@ -165,7 +179,6 @@ body {
 
 .card-body {
   flex-grow: 1;
-  padding: 10px 0;
   font-size: 0.95rem;
   color: var(--color-text); 
 }
@@ -183,7 +196,6 @@ body {
   gap: 24px;
   margin: 40px 0;
 }
-
 
 .modal-overlay {
   position: fixed;
@@ -211,7 +223,7 @@ body {
 
 [data-theme="dark"] .modal-content,
 [data-theme="dark"] .modal-body {
-  color: #ffffff;
+  color: white;
 }
 
 .modal-close {
