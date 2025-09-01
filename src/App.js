@@ -13,12 +13,10 @@ function AppContent() {
   const [showForm, setShowForm] = useState(false);
   const [showImage, setShowImage] = useState(false);
 
-
   const handleSuccess = () => alert("Success! Action completed successfully.");
   const handleWarning = () => alert("Warning! Please be careful.");
   const handleDanger = () => alert("Danger! This action is irreversible.");
-  const handleInfo = () => alert("ℹInfo: Here is some useful information.");
-
+  const handleInfo = () => alert("ℹ Info: Here is some useful information.");
 
   const showcaseCards = [
     {
@@ -30,7 +28,7 @@ function AppContent() {
       expandable: true,
       clickable: true,
       body: "Expandable card with header, footer, and top image.",
-      
+      extra: "This is the hidden expanded content. Click again to collapse.",
     },
     {
       id: 2,
@@ -40,7 +38,6 @@ function AppContent() {
       clickable: true,
       link: "https://picsum.photos",
       body: "Clicking the image opens a link.",
-    
     },
     {
       id: 3,
@@ -49,7 +46,6 @@ function AppContent() {
       shadow: "md",
       clickable: true,
       body: "This card has a background image with overlay.",
-     
     },
   ];
 
@@ -57,19 +53,25 @@ function AppContent() {
     <div className="container">
       <h1 className="main-heading">React App Library</h1>
 
-   
       <h2 className="section-heading">Buttons Section</h2>
       <div style={{ marginBottom: "20px" }}>
         <Button onClick={toggleTheme}>
           {theme === "light" ? "Dark Theme" : "Light Theme"}
         </Button>
-        <Button variant="success" onClick={handleSuccess}>Success</Button>
-        <Button variant="warning" onClick={handleWarning}>Warning</Button>
-        <Button variant="danger" onClick={handleDanger}>Danger</Button>
-        <Button variant="info" onClick={handleInfo}>Info</Button>
+        <Button variant="success" onClick={handleSuccess}>
+          Success
+        </Button>
+        <Button variant="warning" onClick={handleWarning}>
+          Warning
+        </Button>
+        <Button variant="danger" onClick={handleDanger}>
+          Danger
+        </Button>
+        <Button variant="info" onClick={handleInfo}>
+          Info
+        </Button>
       </div>
 
-     
       <h2 className="section-heading">Cards Section</h2>
       <div className="card-gallery">
         {showcaseCards.map((card) => (
@@ -84,12 +86,6 @@ function AppContent() {
                 }}
               >
                 {card.header}
-              
-                {card.status && (
-                  <span className={`badge badge-${card.status}`}>
-                    {card.status.toUpperCase()}
-                  </span>
-                )}
               </div>
             }
             footer={card.footer}
@@ -99,25 +95,31 @@ function AppContent() {
             expandable={card.expandable}
             clickable={card.clickable}
             link={card.link}
+            extra={card.extra}
           >
             <p>{card.body}</p>
           </Card>
         ))}
       </div>
 
-    
       <h2 className="section-heading">Modals Section</h2>
-      <Button variant="secondary" onClick={() => setShowAlert(true)}>Open Alert</Button>
-      <Button variant="secondary" onClick={() => setShowConfirm(true)}>Open Confirm</Button>
-      <Button variant="secondary" onClick={() => setShowForm(true)}>Open Form</Button>
-      <Button variant="secondary" onClick={() => setShowImage(true)}>Open Image</Button>
-
+      <Button variant="secondary" onClick={() => setShowAlert(true)}>
+        Open Alert
+      </Button>
+      <Button variant="secondary" onClick={() => setShowConfirm(true)}>
+        Open Confirm
+      </Button>
+      <Button variant="secondary" onClick={() => setShowForm(true)}>
+        Open Form
+      </Button>
+      <Button variant="secondary" onClick={() => setShowImage(true)}>
+        Open Image
+      </Button>
 
       <Modal isOpen={showAlert} onClose={() => setShowAlert(false)} title="Alert">
         This is an alert message.
       </Modal>
 
-      
       <Modal
         isOpen={showConfirm}
         onClose={() => setShowConfirm(false)}
@@ -128,7 +130,6 @@ function AppContent() {
         Are you sure you want to delete this item?
       </Modal>
 
-      
       <Modal
         isOpen={showForm}
         onClose={() => setShowForm(false)}
@@ -138,11 +139,12 @@ function AppContent() {
         <form>
           <input type="text" placeholder="Username" />
           <input type="password" placeholder="Password" />
-          <Button variant="primary" type="submit">Submit</Button>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
         </form>
       </Modal>
 
-    
       <Modal
         isOpen={showImage}
         onClose={() => setShowImage(false)}
@@ -150,7 +152,6 @@ function AppContent() {
         imageSrc="https://picsum.photos/600/400"
       />
 
-     
       <footer
         style={{
           textAlign: "center",
